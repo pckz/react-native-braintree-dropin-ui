@@ -1,11 +1,13 @@
 package tech.power.RNBraintreeDropIn;
 
-import android.app.Application;
-import expo.modules.core.interfaces.ApplicationLifecycleListener;
+import android.app.Activity;
+import android.os.Bundle;
 
-public class RNBraintreeDropInActivityLifecycleListener implements ApplicationLifecycleListener {
+import expo.modules.core.interfaces.ReactActivityLifecycleListener;
+
+public class RNBraintreeDropInActivityLifecycleListener implements ReactActivityLifecycleListener {
   @Override
-  public void onCreate(Application application) {
-    RNBraintreeDropInModule.initDropInClient(this);
+  public void onCreate(Activity activity, Bundle savedInstanceState) {
+    RNBraintreeDropInModule.initDropInClient(activity);
   }
 }
