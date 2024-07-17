@@ -1,6 +1,6 @@
 # react-native-braintree-dropin-ui
 
-> React Native integration of Braintree Drop-in for IOS & ANDROID (Apple Pay, Google Pay, Paypal, Venmo, Credit Card)
+React Native integration of Braintree Drop-in for iOS & Android (Apple Pay, Google Pay, Paypal, Venmo, credit card)
 
 <p align="center">
 <img src="https://raw.githubusercontent.com/wgltony/react-native-braintree-dropin-ui/master/node_modules/iphone.png" width="250">
@@ -11,88 +11,32 @@
 
 For React Native versions >= 0.60
 
-IOS
+### NPM
 ```bash
 npm install react-native-braintree-dropin-ui --save
+```
 
-OR
-
+### Yarn
+```bash
 yarn add react-native-braintree-dropin-ui
+```
 
+### iOS
+```
 cd ./ios
 pod install
 ```
 
-Android
-```bash
-npm install react-native-braintree-dropin-ui --save
+## Configure Payment Method
+See Braintree’s documentation for [Apple Pay][8], [Google Pay][9], [Paypal][10], [Venmo][11]. Once you’ve finished setting up all each payment method, it will appear in the drop-in UI.
 
-OR
+### Apple Pay
 
-yarn add react-native-braintree-dropin-u
-```
+The Drop-in UI will show Apple Pay as a payment option as long as you've completed the [Apple Pay integration][6] and the customer’s [device and card type are supported][7].
 
-## Configurate Payment Method(For ALL RN VERSIONS)
-See Braintree's documentation, [Apple Pay][7], [Google Pay][8], [Paypal][9], [Venmo][10]
-Once you have finished setting up all the configurations, it will show in the dropin UI.
+### PayPal
 
-
-For React Native versions < 0.60
-### Mostly automatic installation
-
-```bash
-react-native link react-native-braintree-dropin-ui
-```
-
-#### iOS specific
-
-You must have a iOS deployment target \>= 12.0.
-
-If you don't have a Podfile or are unsure on how to proceed, see the [CocoaPods][1] usage guide.
-
-In your `Podfile`, add:
-
-```
-# comment the next line to disable credit card scanning
-pod 'CardIO'
-
-```
-
-When using React Native versions < 0.60, the following must also be added to your `Podfile`:
-
-```
-pod 'Braintree'
-
-pod 'BraintreeDropIn'
-
- # comment the next line to disable Apple pay
-pod 'Braintree/ApplePay'
-
- # comment the next line to disable PayPal
-pod 'Braintree/PayPal'
-
- # comment the next line to disable Venmo
-pod 'Braintree/Venmo'
-
- # Data collector for Braintree Advanced Fraud Tools
-pod 'Braintree/DataCollector'
-```
-
-Then:
-
-```bash
-cd ios
-pod repo update # optional and can be very long
-pod install
-```
-
-#### Apple Pay
-
-The Drop-in will show Apple Pay as a payment option as long as you've completed the [Apple Pay integration][5] and the customer's [device and card type are supported][6].
-
-#### PayPal
-
-To enable paypal payments in iOS, you will need to add `setReturnURLScheme` to `launchOptions` of your `AppDelegate.m` / `AppDelegate.mm`
+To enable PayPal payments in iOS, you will need to add `setReturnURLScheme` to the `launchOptions` of your `AppDelegate.m`
 
 ```objective-c
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
@@ -101,77 +45,19 @@ To enable paypal payments in iOS, you will need to add `setReturnURLScheme` to `
 }
 ```
 
-#### Android specific
+## Configuration
 
-Add in your `MainActivity.java`:
-```
-    import tech.power.RNBraintreeDropIn.RNBraintreeDropInModule;
+For more configuration options, see Braintree’s documentation ([iOS][2] | [Android][3]).
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        // ...
-        RNBraintreeDropInModule.initDropInClient(this);
-    }
-```
+### 3D Secure
 
-Note: Only complete the next steps if using React Native versions < 0.60, autolinking will do these steps automatically.
+If you plan on using 3D Secure, you have to do the following:
 
-Add in your `app/build.gradle`:
+#### iOS
 
-```
-dependencies {
-...
-    implementation project(':react-native-braintree-dropin-ui')
-    implementation "io.card:android-sdk:5.+"
-    implementation 'com.braintreepayments.api:data-collector:2.+'
-    implementation 'com.google.android.gms:play-services-wallet:11.4.0'
-```
+##### Configure a new URL scheme
 
-Add in your `MainApplication.java`:
-
-```
-  import tech.power.RNBraintreeDropIn.RNBraintreeDropInPackage;
-
-
-  return Arrays.<ReactPackage>asList(
-             ... ...
-             new RNBraintreeDropInPackage()  // <------ add here
-         );
-
-```
-
-The below steps apply to all versions of React Native
-
-If you wish to support Google Pay, add in your `AndroidManifest.xml`:
-
-```
-    <!-- Enables the Google Pay API -->
-    <meta-data
-        android:name="com.google.android.gms.wallet.api.enabled"
-        android:value="true"/>
-```
-
-If you wish to support card swipe support, add in your 'app/build.gradle`:
-
-```
-dependencies {
-...
-    implementation "io.card:android-sdk:5.+"
-```
-
-### Configuration
-
-For more configuration options, see Braintree's documentation ([iOS][2] | [Android][3]).
-
-#### 3D Secure
-
-If you plan on using 3D Secure, you have to do the following.
-
-##### iOS
-
-###### Configure a new URL scheme
-
-Add a bundle url scheme `{BUNDLE_IDENTIFIER}.payments` in your app Info via XCode or manually in the `Info.plist`.
+Add a bundle url scheme `{BUNDLE_IDENTIFIER}.payments` in your app Info via Xcode or manually in the `Info.plist`.
 In your `Info.plist`, you should have something like:
 
 ```xml
@@ -190,7 +76,7 @@ In your `Info.plist`, you should have something like:
 </array>
 ```
 
-###### Update your code
+##### Update your code
 
 In your `AppDelegate.m`:
 
@@ -210,7 +96,7 @@ In your `AppDelegate.m`:
             options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options {
 
     if ([url.scheme localizedCaseInsensitiveCompare:self.paymentsURLScheme] == NSOrderedSame) {
-        return [BTAppContextSwitcher handleOpenURL:url];
+      return [BTAppContextSwitcher handleOpenURL:url];
     }
 
     return [RCTLinkingManager application:application openURL:url options:options];
@@ -246,9 +132,13 @@ private var paymentsURLScheme: String {
 }
 ```
 
-## Usage
+#### Android
 
-For the API, see the [Flow typings][4].
+Set up [browser switch][4].
+
+## Use
+
+For the API, see the [Flow typings][5].
 
 ### Basic
 
@@ -259,8 +149,8 @@ BraintreeDropIn.show({
   clientToken: 'token',
   merchantIdentifier: 'applePayMerchantIdentifier',
   googlePayMerchantId: 'googlePayMerchantId',
-  countryCode: 'US',    //apple pay setting
-  currencyCode: 'USD',   //apple pay setting
+  countryCode: 'US',    // Apple Pay setting
+  currencyCode: 'USD',   // Apple Pay setting
   merchantName: 'Your Merchant Name for Apple Pay',
   orderTotal:'Total Price',
   googlePay: true,
@@ -273,9 +163,9 @@ BraintreeDropIn.show({
 .then(result => console.log(result))
 .catch((error) => {
   if (error.code === 'USER_CANCELLATION') {
-    // update your UI to handle cancellation
+    // Update your UI to handle cancellation
   } else {
-    // update your UI to handle other errors
+    // Update your UI to handle other errors
   }
 });
 ```
@@ -292,8 +182,8 @@ BraintreeDropIn.show({
   },
   merchantIdentifier: 'applePayMerchantIdentifier',
   googlePayMerchantId: 'googlePayMerchantId',
-  countryCode: 'US',    //apple pay setting
-  currencyCode: 'USD',   //apple pay setting
+  countryCode: 'US',    // Apple Pay setting
+  currencyCode: 'USD',   // Apple Pay setting
   merchantName: 'Your Merchant Name for Apple Pay',
   orderTotal:'Total Price',
   googlePay: true,
@@ -306,41 +196,11 @@ BraintreeDropIn.show({
 .then(result => console.log(result))
 .catch((error) => {
   if (error.code === 'USER_CANCELLATION') {
-    // update your UI to handle cancellation
+    // Update your UI to handle cancellation
   } else {
-    // update your UI to handle other errors
-    // for 3D secure, there are two other specific error codes: 3DSECURE_NOT_ABLE_TO_SHIFT_LIABILITY and 3DSECURE_LIABILITY_NOT_SHIFTED
+    // Update your UI to handle other errors
+    // For 3D Secure, there are two other specific error codes: 3DSECURE_NOT_ABLE_TO_SHIFT_LIABILITY and 3DSECURE_LIABILITY_NOT_SHIFTED
   }
-});
-```
-
-### Fetch more recent payment method
-
-```javascript
-import BraintreeDropIn from 'react-native-braintree-dropin-ui';
-
-BraintreeDropIn.fetchMostRecentPaymentMethod(clientToken)
-.then(result => console.log(result))
-.catch((error) => {
-  // Handle error
-});
-```
-
-### Tokenize card
-
-```javascript
-import BraintreeDropIn from 'react-native-braintree-dropin-ui';
-
-BraintreeDropIn.tokenizeCard(clientToken, {
-  number: '4111111111111111',
-  expirationMonth: '10',
-  expirationYear: '23',
-  cvv: '123',
-  postalCode: '12345',
-})
-.then(cardNonce => console.log(cardNonce))
-.catch((error) => {
-  // Handle error
 });
 ```
 
@@ -356,10 +216,11 @@ BraintreeDropIn.show({
 [1]:  http://guides.cocoapods.org/using/using-cocoapods.html
 [2]:  https://github.com/braintree/braintree-ios-drop-in
 [3]:  https://github.com/braintree/braintree-android-drop-in
-[4]:  ./index.js.flow
-[5]:  https://developers.braintreepayments.com/guides/apple-pay/configuration/ios/v5
-[6]:  https://articles.braintreepayments.com/guides/payment-methods/apple-pay#compatibility
-[7]:  https://developers.braintreepayments.com/guides/apple-pay/overview
-[8]:  https://developers.braintreepayments.com/guides/google-pay/overview
-[9]: https://developers.braintreepayments.com/guides/paypal/overview/ios/v5
-[10]: https://developers.braintreepayments.com/guides/venmo/overview
+[4]:  https://developers.braintreepayments.com/guides/client-sdk/setup/android/v2#browser-switch-setup
+[5]:  ./index.js.flow
+[6]:  https://developers.braintreepayments.com/guides/apple-pay/configuration/ios/v4
+[7]:  https://articles.braintreepayments.com/guides/payment-methods/apple-pay#compatibility
+[8]:  https://developers.braintreepayments.com/guides/apple-pay/overview
+[9]:  https://developers.braintreepayments.com/guides/google-pay/overview
+[10]: https://developers.braintreepayments.com/guides/paypal/overview/ios/v4
+[11]: https://developers.braintreepayments.com/guides/venmo/overview
