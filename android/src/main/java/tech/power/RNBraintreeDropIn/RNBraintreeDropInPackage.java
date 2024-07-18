@@ -10,16 +10,7 @@ import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.uimanager.ViewManager;
 import com.facebook.react.bridge.JavaScriptModule;
 
-import android.content.Context;
-import expo.modules.core.interfaces.Package;
-import expo.modules.core.interfaces.ReactActivityLifecycleListener;
-
 public class RNBraintreeDropInPackage implements ReactPackage {
-    @Override
-    public List<? extends ReactActivityLifecycleListener> createReactActivityLifecycleListeners(Context activityContext) {
-      return Collections.singletonList(new RNBraintreeDropInActivityLifecycleListener());
-    }
-
     @Override
     public List<NativeModule> createNativeModules(ReactApplicationContext reactContext) {
       return Arrays.<NativeModule>asList(new RNBraintreeDropInModule(reactContext));
