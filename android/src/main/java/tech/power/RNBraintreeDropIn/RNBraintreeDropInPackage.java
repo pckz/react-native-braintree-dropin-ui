@@ -17,7 +17,7 @@ import expo.modules.core.interfaces.ReactActivityLifecycleListener;
 public class RNBraintreeDropInActivityPackage implements Package {
   @Override
   public List<? extends ReactActivityLifecycleListener> createReactActivityLifecycleListeners(Context activityContext) {
-    print('RNBraintreeDropInActivityPackageRNBraintreeDropInActivityPackageRNBraintreeDropInActivityPackage');
+    print("RNBraintreeDropInActivityPackageRNBraintreeDropInActivityPackageRNBraintreeDropInActivityPackage");
 
     return Collections.emptyList();
           //return Collections.singletonList(new MyLibReactActivityLifecycleListener());
