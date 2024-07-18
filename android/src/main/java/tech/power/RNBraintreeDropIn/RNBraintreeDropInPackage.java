@@ -14,17 +14,15 @@ import android.content.Context;
 import expo.modules.core.interfaces.Package;
 import expo.modules.core.interfaces.ReactActivityLifecycleListener;
 
-public class RNBraintreeDropInActivityPackage implements Package {
-  @Override
-  public List<? extends ReactActivityLifecycleListener> createReactActivityLifecycleListeners(Context activityContext) {
-    print("RNBraintreeDropInActivityPackageRNBraintreeDropInActivityPackageRNBraintreeDropInActivityPackage");
-
-    return Collections.emptyList();
-          //return Collections.singletonList(new MyLibReactActivityLifecycleListener());
-  }
-}
-
 public class RNBraintreeDropInPackage implements ReactPackage {
+    @Override
+    public List<? extends ReactActivityLifecycleListener> createReactActivityLifecycleListeners(Context activityContext) {
+      print("RNBraintreeDropInActivityPackageRNBraintreeDropInActivityPackageRNBraintreeDropInActivityPackage");
+
+      return Collections.emptyList();
+          //return Collections.singletonList(new MyLibReactActivityLifecycleListener());
+    }
+
     @Override
     public List<NativeModule> createNativeModules(ReactApplicationContext reactContext) {
       return Arrays.<NativeModule>asList(new RNBraintreeDropInModule(reactContext));
