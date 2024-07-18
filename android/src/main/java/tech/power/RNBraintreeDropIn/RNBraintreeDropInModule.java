@@ -31,16 +31,6 @@ import com.google.android.gms.wallet.WalletConstants;
 
 import java.util.Objects;
 
-import android.app.Application;
-import expo.modules.core.interfaces.ApplicationLifecycleListener;
-
-public class RNBraintreeDropInActivityLifecycleListener implements ApplicationLifecycleListener {
-  @Override
-  public void onCreate(Application application) {
-    RNBraintreeDropInModule.initDropInClient(this);
-  }
-}
-
 public class RNBraintreeDropInModule extends ReactContextBaseJavaModule {
   private boolean isVerifyingThreeDSecure = false;
   private static DropInClient dropInClient = null;
