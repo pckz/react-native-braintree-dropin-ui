@@ -7,6 +7,10 @@
     "expo-modules-core": "*"
   },
   "devDependencies": {},
+  "peerDependencies": {
+    "react-native": "*",
+    "expo": "*"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -21,9 +25,6 @@
     "dropin",
     "drop-in-ui"
   ],
-  "peerDependencies": {
-    "react-native": "*"
-  },
   "author": "tony0130 <wgltony@hotmail.com>",
   "license": "MIT",
   "bugs": {
