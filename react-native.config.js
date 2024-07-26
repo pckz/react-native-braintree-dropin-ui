@@ -3,7 +3,8 @@ module.exports = {
     platforms: {
       ios: {},
       android: {
-      	packageImportPath: 'import tech.power.RNBraintreeDropIn.RNBraintreeDropInPackage;',
+        packageImportPath:
+          'import tech.power.RNBraintreeDropIn.RNBraintreeDropInPackage;',
         packageInstance: 'new RNBraintreeDropInPackage()',
       },
     },

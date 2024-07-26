@@ -1,31 +1,22 @@
 buildscript {
-    def expoModulesCorePlugin = new File(project(":expo-modules-core").projectDir.absolutePath, "ExpoModulesCorePlugin.gradle")
-    if (expoModulesCorePlugin.exists()) {
-        apply from: expoModulesCorePlugin
-        applyKotlinExpoModulesCorePlugin()
-}
-
     repositories {
+        jcenter()
         google()
-        mavenCentral()
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:7.3.1'
+        classpath 'com.android.tools.build:gradle:7.4.2'
     }
 }
 
 apply plugin: 'com.android.library'
 
 android {
-    namespace 'tech.power.RNBraintreeDropIn'
-
-    compileSdkVersion 33
-    buildToolsVersion '33.0.1'
+    compileSdkVersion 30
 
     defaultConfig {
-        minSdkVersion 21
-        targetSdkVersion 33
+        minSdkVersion 30
+        targetSdkVersion 30
         versionCode 1
         versionName "1.0"
     }
@@ -40,9 +31,11 @@ repositories {
 }
 
 dependencies {
-    implementation 'com.braintreepayments.api:drop-in:6.11.0'
+    implementation 'com.braintreepayments.api:google-payment:3.2.0'
+    implementation 'com.google.android.gms:play-services-wallet:16.0.1'
+    implementation 'com.braintreepayments.api:data-collector:2.+' //4.31.0
+    implementation 'com.braintreepayments.api:drop-in:5.+'
     implementation 'com.facebook.react:react-native:+'
-    implementation 'expo.modules.core:react-native:+'
 }
 
 // https://developers.braintreepayments.com/guides/3d-secure/migration/android/v3

@@ -1,16 +1,10 @@
 {
   "name": "react-native-braintree-dropin-ui",
-  "version": "1.1.7",
+  "version": "1.1.3",
   "description": "> React Native integration of Braintree Drop-in IOS V4 ANDROID V2 (Apple Pay &Android Pay Enabled)",
   "main": "index.js",
-  "dependencies": {
-    "expo-modules-core": "*"
-  },
+  "dependencies": {},
   "devDependencies": {},
-  "peerDependencies": {
-    "react-native": "*",
-    "expo": "*"
-  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -25,6 +19,9 @@
     "dropin",
     "drop-in-ui"
   ],
+  "peerDependencies": {
+    "react-native": "*"
+  },
   "author": "tony0130 <wgltony@hotmail.com>",
   "license": "MIT",
   "bugs": {
