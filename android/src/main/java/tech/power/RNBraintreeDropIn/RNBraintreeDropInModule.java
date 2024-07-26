@@ -54,8 +54,6 @@ public class RNBraintreeDropInModule extends ReactContextBaseJavaModule {
       dropInRequest.vaultManager(options.getBoolean("vaultManager"));
     }
 
-    dropInRequest.collectDeviceData(true);
-
     if(options.getBoolean("googlePay")){
       GooglePaymentRequest googlePaymentRequest = new GooglePaymentRequest()
         .transactionInfo(TransactionInfo.newBuilder()
