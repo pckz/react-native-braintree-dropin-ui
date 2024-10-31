@@ -5,7 +5,7 @@ Pod::Spec.new do |s|
   s.description  = <<-DESC
                   RNBraintreeDropIn
                    DESC
-  s.homepage     = "https://github.com/bamlab/react-native-braintree-payments-drop-in"
+  s.homepage     = "https://github.com/conbrioexams/react-native-braintree-payments-drop-in"
   s.license      = "MIT"
   s.author             = { "author" => "lagrange.louis@gmail.com" }
   s.platform     = :ios, "11.0"
