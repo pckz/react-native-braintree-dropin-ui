@@ -144,7 +144,7 @@ RCT_EXPORT_METHOD(show
                           }
                         } else if (
                             result.paymentMethod == nil &&
-                            (result.paymentMethodType == 16 || result.paymentMethodType == 18)) { // Apple Pay
+                            (result.paymentMethodType == 16 || result.paymentMethodType == 17 || result.paymentMethodType == 18)) { // Apple Pay
                           // UIViewController *ctrl = [[[[UIApplication sharedApplication] delegate] window]
                           // rootViewController]; [ctrl presentViewController:self.viewController animated:@YES
                           // completion:nil];
